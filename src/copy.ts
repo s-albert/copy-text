@@ -11,6 +11,16 @@ export class Copy {
     }
   }
 
+  static copyTextAndAppend(activeTextEditor: vs.TextEditor) {
+    if (activeTextEditor) {
+      const selection = activeTextEditor.selection;
+      if (!selection.isEmpty) {
+        const text: string = clipboardy.readSync();
+        clipboardy.write(`${text}\n\n${activeTextEditor.document.getText(selection)}`);
+      }
+    }
+  }
+
 /**
  * Copys text with metadata
  * @param activeTextEditor

@@ -2,7 +2,7 @@
   "name": "copy-text",
   "displayName": "Copy Text",
   "description": "Offers more copy options: Copies text without colors, optionally adds metainfo like document name and date.",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "publisher": "salbert",
   "icon": "images/icon.png",
   "keywords": [
@@ -32,11 +32,15 @@
     "commands": [
       {
         "command": "copy-text.copyTextOnly",
-        "title": "Copy without colors"
+        "title": "Copy Without Syntax Highlighting"
+      },
+      {
+        "command": "copy-text.copyAndAppendText",
+        "title": "Copy Text and Append it to the Clipboard"
       },
       {
         "command": "copy-text.copyTextWithMetadata",
-        "title": "Copy text with metainfo"
+        "title": "Copy Text With Metainfo"
       }
     ],
     "menus": {
@@ -51,6 +55,10 @@
       {
         "command": "copy-text.copyTextOnly",
         "key": "ctrl+shift+c"
+      },
+      {
+        "command": "copy-text.copyAndAppendText",
+        "key": "ctrl+shift+a"
       }
     ],
     "configuration": {

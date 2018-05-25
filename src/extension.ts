@@ -22,6 +22,16 @@ export function activate(context: vscode.ExtensionContext): void {
   );
 
   context.subscriptions.push(
+    vscode.commands.registerCommand('copy-text.copyAndAppendText', () => {
+      const commandName = 'Copy and append';
+
+      runCommand(commandName, () => {
+        Copy.copyTextAndAppend(vscode.window.activeTextEditor);
+      });
+    })
+  );
+
+  context.subscriptions.push(
     vscode.commands.registerCommand('copy-text.copyTextWithMetadata', () => {
       const commandName = 'Copy with metainfo';
 
