@@ -1,0 +1,89 @@
+{
+  "name": "copy-text",
+  "displayName": "Copy Text",
+  "description": "Offers more copy options: Copies text without colors, optionally adds metainfo like document name and date.",
+  "version": "0.1.1",
+  "publisher": "salbert",
+  "icon": "images/icon.png",
+  "keywords": [
+    "copy",
+    "text",
+    "plain",
+    "colors",
+    "metainfo"
+  ],
+  "galleryBanner": {
+    "color": "#252627",
+    "theme": "dark"
+  },
+  "license": "MIT",
+  "engines": {
+    "vscode": "^1.16.0"
+  },
+  "categories": [
+    "Other",
+    "Formatters"
+  ],
+  "activationEvents": [
+    "*"
+  ],
+  "main": "./out/src/extension",
+  "contributes": {
+    "commands": [
+      {
+        "command": "copy-text.copyTextOnly",
+        "title": "Copy without colors"
+      },
+      {
+        "command": "copy-text.copyTextWithMetadata",
+        "title": "Copy text with metainfo"
+      }
+    ],
+    "menus": {
+      "editor/context": [
+        {
+          "command": "copy-text.copyTextOnly",
+          "group": "9_cutcopypaste"
+        },
+        {
+          "command": "copy-text.copyTextWithMetadata",
+          "group": "9_cutcopypaste"
+        }
+      ]
+    },
+    "keybindings": [
+      {
+        "command": "copy-text.copyTextOnly",
+        "key": "ctrl+shift+c"
+      }
+    ],
+    "configuration": {
+      "type": "object",
+      "title": "Copy text configuration",
+      "properties": {}
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "lint": "node ./node_modules/tslint/bin/tslint src/**/*.ts",
+    "compile": "npm run lint && tsc -p ./",
+    "publish": "vsce publish",
+    "postinstall": "node ./node_modules/vscode/bin/install"
+  },
+  "devDependencies": {
+    "@types/node": "^6.0.111",
+    "tslint": "^5.10.0"
+  },
+  "dependencies": {
+    "clipboardy": "^1.2.3",
+    "typescript": "^2.8.3",
+    "vscode": "^1.1.18"
+  },
+  "bugs": {
+    "url": "https://github.com/s-albert/comment-ts/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/s-albert/comment-ts.git"
+  }
+}
