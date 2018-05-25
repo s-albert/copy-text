@@ -23,7 +23,7 @@ static copyTextWithMetadata(activeTextEditor: vs.TextEditor) {
         const date = new Date();
         const selection = activeTextEditor.selection;
         const caret = selection.start;
-        const text = `${activeTextEditor.document.getText(selection)}\n(${sourceFilename} line ${caret.line} - ${date.toLocaleDateString()})`;
+        const text = `${activeTextEditor.document.getText(selection)}\n(${sourceFilename} - line ${caret.line} - ${date.toLocaleDateString()} ${date.toLocaleTimeString()})`;
         clipboardy.write(text);
       }
     }

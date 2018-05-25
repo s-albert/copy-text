@@ -2,7 +2,7 @@
   "name": "copy-text",
   "displayName": "Copy Text",
   "description": "Offers more copy options: Copies text without colors, optionally adds metainfo like document name and date.",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "publisher": "salbert",
   "icon": "images/icon.png",
   "keywords": [
@@ -44,10 +44,6 @@
         {
           "command": "copy-text.copyTextOnly",
           "group": "9_cutcopypaste"
-        },
-        {
-          "command": "copy-text.copyTextWithMetadata",
-          "group": "9_cutcopypaste"
         }
       ]
     },
@@ -80,10 +76,10 @@
     "vscode": "^1.1.18"
   },
   "bugs": {
-    "url": "https://github.com/s-albert/comment-ts/issues"
+    "url": "https://github.com/s-albert/copy-text/issues"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/s-albert/comment-ts.git"
+    "url": "https://github.com/s-albert/copy-text.git"
   }
 }

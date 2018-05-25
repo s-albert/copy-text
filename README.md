@@ -5,7 +5,8 @@
 To copy text without colors
 * press `Ctrl+Shift+C`
 * or select 'Copy text without colors' from your context menu
+* or select 'Copy text without colors' from command palette (F1)
 
 To copy text with metainfo
-* select 'Copy text with metainfo' from your context menu
+* select 'Copy text with metainfo' from command palette (F1)
 
