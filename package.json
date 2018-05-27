@@ -2,7 +2,7 @@
   "name": "copy-text",
   "displayName": "Copy Text",
   "description": "Offers more copy options: Copies text without colors, optionally adds metainfo like document name and date.",
-  "version": "0.2.0",
+  "version": "0.4.1",
   "publisher": "salbert",
   "icon": "images/icon.png",
   "keywords": [
@@ -17,6 +17,13 @@
     "theme": "dark"
   },
   "license": "MIT",
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "lint": "node ./node_modules/tslint/bin/tslint src/**/*.ts",
+    "compile": "npm run lint && tsc -p ./",
+    "publish": "vsce publish",
+    "postinstall": "node ./node_modules/vscode/bin/install"
+  },
   "engines": {
     "vscode": "^1.16.0"
   },
@@ -36,17 +43,26 @@
       },
       {
         "command": "copy-text.copyAndAppendText",
-        "title": "Copy Text and Append it to the Clipboard"
+        "title": "Copy and Append Text Without Syntax Highlighting"
       },
       {
         "command": "copy-text.copyTextWithMetadata",
         "title": "Copy Text With Metainfo"
+      },
+      {
+        "command": "copy-text.copyAndAppendTextWithMetadata",
+        "title": "Copy and Append Text With Metainfo"
+      },
+      {
+        "command": "copy-text.copyCodeForMarkdown",
+        "title": "Copy Code for Markdown"
       }
     ],
     "menus": {
       "editor/context": [
         {
           "command": "copy-text.copyTextOnly",
+          "key": "ctrl+shift+c",
           "group": "9_cutcopypaste"
         }
       ]
@@ -58,29 +74,46 @@
       },
       {
         "command": "copy-text.copyAndAppendText",
-        "key": "ctrl+shift+a"
+        "key": "ctrl+shift+a ctrl+shift+c"
+      },
+      {
+        "command": "copy-text.copyTextWithMetadata",
+        "key": "ctrl+shift+m"
+      },
+      {
+        "command": "copy-text.copyAndAppendTextWithMetadata",
+        "key": "ctrl+shift+a ctrl+shift+m"
       }
     ],
     "configuration": {
       "type": "object",
       "title": "Copy text configuration",
-      "properties": {}
+      "properties": {
+        "copy-text.fullPath": {
+          "type": "boolean",
+          "default": false,
+          "description": "When enabled, the full file path is included in the metainfo."
+        },
+        "copy-text.includeDate": {
+          "type": "boolean",
+          "default": true,
+          "description": "When enabled, the date is added to the metainfo."
+        },
+        "copy-text.includeTime": {
+          "type": "boolean",
+          "default": true,
+          "description": "When enabled, the time is added to the metainfo."
+        }
+      }
     }
-  },
-  "scripts": {
-    "vscode:prepublish": "npm run compile",
-    "lint": "node ./node_modules/tslint/bin/tslint src/**/*.ts",
-    "compile": "npm run lint && tsc -p ./",
-    "publish": "vsce publish",
-    "postinstall": "node ./node_modules/vscode/bin/install"
   },
   "devDependencies": {
     "@types/node": "^6.0.111",
-    "tslint": "^5.10.0"
+    "tslint": "^5.10.0",
+    "typescript": "^2.8.3"
   },
   "dependencies": {
     "clipboardy": "^1.2.3",
-    "typescript": "^2.8.3",
     "vscode": "^1.1.18"
   },
   "bugs": {
