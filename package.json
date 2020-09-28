@@ -2,7 +2,7 @@
   "name": "copy-text",
   "displayName": "Copy Text",
   "description": "Offers more copy options: Copies text without colors, optionally adds metainfo like document name and date.",
-  "version": "0.4.6",
+  "version": "0.4.7",
   "publisher": "salbert",
   "scripts": {
     "vscode:prepublish": "npm run compile",
@@ -67,11 +67,6 @@
         {
           "command": "copy-text.copyTextOnly",
           "key": "ctrl+shift+c",
-          "group": "9_cutcopypaste"
-        },
-        {
-          "command": "copy-text.openLink",
-          "key": "ctrl+shift+f1",
           "group": "9_cutcopypaste"
         }
       ]

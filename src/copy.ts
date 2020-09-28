@@ -1,14 +1,14 @@
 import * as vscode from 'vscode';
 
 export class Copy {
-  static copyTextOnly(append = false): void {
+  static async copyTextOnly(append = false): Promise<void> {
     const activeTextEditor = vscode.window.activeTextEditor;
     if (activeTextEditor) {
       const selection = activeTextEditor.selection;
       if (!selection.isEmpty) {
         let text = activeTextEditor.document.getText(selection);
         if (append) {
-          const currentText = vscode.env.clipboard.readText();
+          const currentText = await vscode.env.clipboard.readText();
           text = `${currentText}\n\n${text}`;
         }
         vscode.env.clipboard.writeText(text);
@@ -45,14 +45,14 @@ export class Copy {
    * Copies text with metadata
    * @param activeTextEditor
    */
-  static copyTextWithMetadata(append = false): void {
+  static async copyTextWithMetadata(append = false): Promise<void> {
     const activeTextEditor = vscode.window.activeTextEditor;
     if (activeTextEditor) {
       const selection = activeTextEditor.selection;
       if (!selection.isEmpty) {
         let text = activeTextEditor.document.getText(selection);
         if (append) {
-          const currentText = vscode.env.clipboard.readText();
+          const currentText = await vscode.env.clipboard.readText();
           text = `${currentText}\n\n${text}`;
         }
 
