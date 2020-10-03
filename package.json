@@ -2,7 +2,7 @@
   "name": "copy-text",
   "displayName": "Copy Text",
   "description": "Offers more copy options: Copies text without colors, optionally adds metainfo like document name and date.",
-  "version": "0.4.7",
+  "version": "0.4.8",
   "publisher": "salbert",
   "scripts": {
     "vscode:prepublish": "npm run compile",
@@ -56,10 +56,6 @@
       {
         "command": "copy-text.copyCodeForMarkdown",
         "title": "Copy Code for Markdown"
-      },
-      {
-        "command": "copy-text.openLink",
-        "title": "Open rxjs help"
       }
     ],
     "menus": {
@@ -87,10 +83,6 @@
       {
         "command": "copy-text.copyAndAppendTextWithMetadata",
         "key": "ctrl+shift+a ctrl+shift+m"
-      },
-      {
-        "command": "copy-text.openLink",
-        "key": "ctrl+shift+f1"
       }
     ],
     "configuration": {

@@ -1,5 +1,4 @@
 import * as vscode from 'vscode';
-import { Browser } from './browser';
 import { Copy } from './copy';
 
 /**
@@ -23,5 +22,4 @@ export function activate(context: vscode.ExtensionContext): void {
     regCommand('copy-text.copyAndAppendTextWithMetadata', () => Copy.copyTextWithMetadata(true))
   );
   context.subscriptions.push(regCommand('copy-text.copyCodeForMarkdown', () => Copy.copyCodeForMarkdown()));
-  context.subscriptions.push(regCommand('copy-text.openLink', () => Browser.openLink()));
 }
