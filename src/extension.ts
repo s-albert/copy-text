@@ -6,63 +6,20 @@ import { Copy } from './copy';
  * @param commandName
  * @param implFunc
  */
-function runCommand(commandName: string, implFunc: () => void) {
+function regCommand(commandName: string, implFunc: () => void): vscode.Disposable {
   try {
-    implFunc();
+    return vscode.commands.registerCommand(commandName, implFunc);
   } catch (e) {
-    debugger;
     console.error(`${commandName}: ${e}`);
   }
 }
 
 export function activate(context: vscode.ExtensionContext): void {
+  context.subscriptions.push(regCommand('copy-text.copyTextOnly', () => Copy.copyTextOnly(false)));
+  context.subscriptions.push(regCommand('copy-text.copyAndAppendText', () => Copy.copyTextOnly(true)));
+  context.subscriptions.push(regCommand('copy-text.copyTextWithMetadata', () => Copy.copyTextWithMetadata(false)));
   context.subscriptions.push(
-    vscode.commands.registerCommand('copy-text.copyTextOnly', (forCompletion: boolean) => {
-      const commandName = 'Copy without syntax highlighting';
-
-      runCommand(commandName, () => {
-        Copy.copyTextOnly(false);
-      });
-    })
+    regCommand('copy-text.copyAndAppendTextWithMetadata', () => Copy.copyTextWithMetadata(true))
   );
-
-  context.subscriptions.push(
-    vscode.commands.registerCommand('copy-text.copyAndAppendText', () => {
-      const commandName = 'Copy and append';
-
-      runCommand(commandName, () => {
-        Copy.copyTextOnly(true);
-      });
-    })
-  );
-
-  context.subscriptions.push(
-    vscode.commands.registerCommand('copy-text.copyTextWithMetadata', () => {
-      const commandName = 'Copy with metainfo';
-
-      runCommand(commandName, () => {
-        Copy.copyTextWithMetadata(false);
-      });
-    })
-  );
-
-  context.subscriptions.push(
-    vscode.commands.registerCommand('copy-text.copyAndAppendTextWithMetadata', () => {
-      const commandName = 'Copy and append with metainfo';
-
-      runCommand(commandName, () => {
-        Copy.copyTextWithMetadata(true);
-      });
-    })
-  );
-
-  context.subscriptions.push(
-    vscode.commands.registerCommand('copy-text.copyCodeForMarkdown', () => {
-      const commandName = 'Copy code for markdown';
-
-      runCommand(commandName, () => {
-        Copy.copyCodeForMarkdown();
-      });
-    })
-  );
+  context.subscriptions.push(regCommand('copy-text.copyCodeForMarkdown', () => Copy.copyCodeForMarkdown()));
 }

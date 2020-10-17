@@ -1,30 +1,34 @@
-import * as vs from 'vscode';
-const clipboardy = require('clipboardy');
+import * as vscode from 'vscode';
 
 export class Copy {
-  static copyTextOnly(append = false) {
-    const activeTextEditor = vs.window.activeTextEditor;
+  static async copyTextOnly(append = false): Promise<void> {
+    const activeTextEditor = vscode.window.activeTextEditor;
     if (activeTextEditor) {
       const selection = activeTextEditor.selection;
       if (!selection.isEmpty) {
         let text = activeTextEditor.document.getText(selection);
         if (append) {
-          const currentText = clipboardy.readSync();
+          const currentText = await vscode.env.clipboard.readText();
           text = `${currentText}\n\n${text}`;
         }
-        clipboardy.write(text);
+        vscode.env.clipboard.writeText(text);
       }
     }
   }
 
-  static copyCodeForMarkdown(append = false) {
-    const activeTextEditor = vs.window.activeTextEditor;
+  /**
+   * TODO: comment copyCodeForMarkdown
+   * Copys code for markdown
+   * @param [append]
+   */
+  static async copyCodeForMarkdown(append = false): Promise<void> {
+    const activeTextEditor = vscode.window.activeTextEditor;
     if (activeTextEditor) {
       const selection = activeTextEditor.selection;
       if (!selection.isEmpty) {
         let text = activeTextEditor.document.getText(selection);
         if (append) {
-          let currentText = clipboardy.readSync();
+          let currentText = await vscode.env.clipboard.readText();
           if (currentText.endsWith('```')) {
             currentText = currentText.substring(0, currentText.length - 3);
           }
@@ -32,7 +36,7 @@ export class Copy {
         } else {
           text = `\`\`\`\n${text}\n\`\`\``;
         }
-        clipboardy.write(text);
+        vscode.env.clipboard.writeText(text);
       }
     }
   }
@@ -41,19 +45,19 @@ export class Copy {
    * Copies text with metadata
    * @param activeTextEditor
    */
-  static copyTextWithMetadata(append = false) {
-    const activeTextEditor = vs.window.activeTextEditor;
+  static async copyTextWithMetadata(append = false): Promise<void> {
+    const activeTextEditor = vscode.window.activeTextEditor;
     if (activeTextEditor) {
       const selection = activeTextEditor.selection;
       if (!selection.isEmpty) {
         let text = activeTextEditor.document.getText(selection);
         if (append) {
-          const currentText = clipboardy.readSync();
+          const currentText = await vscode.env.clipboard.readText();
           text = `${currentText}\n\n${text}`;
         }
 
         let sourceFilename = activeTextEditor.document.fileName;
-        if (vs.workspace.getConfiguration().get('copy-text.fullPath', false)) {
+        if (vscode.workspace.getConfiguration().get('copy-text.fullPath', false)) {
           let i = sourceFilename.lastIndexOf('/');
           if (i <= 0) {
             i = sourceFilename.lastIndexOf('\\');
@@ -67,13 +71,13 @@ export class Copy {
         const caret = selection.start;
         text = `${text}\n(${sourceFilename} - line ${caret.line}/${activeTextEditor.document.lineCount}`;
 
-        if (vs.workspace.getConfiguration().get('copy-text.includeDate', true)) {
+        if (vscode.workspace.getConfiguration().get('copy-text.includeDate', true)) {
           text += ` - ${date.toLocaleDateString()}`;
         }
-        if (vs.workspace.getConfiguration().get('copy-text.includeTime', true)) {
+        if (vscode.workspace.getConfiguration().get('copy-text.includeTime', true)) {
           text += ` - ${date.toLocaleTimeString()}`;
         }
-        clipboardy.write(text + ')');
+        vscode.env.clipboard.writeText(text + ')');
       }
     }
   }
